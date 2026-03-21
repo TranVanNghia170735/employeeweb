@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import Dashboard from "./pages/header/dashboard/Dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
+import PostUser from "./pages/employee/PostUser";
 import Header from "./pages/header/Header";
-import NoMatch from "./pages/header/noMatch/NoMatch";
+import NoMatch from "./pages/noMatch/NoMatch";
 
 function App() {
    return (
@@ -12,6 +13,7 @@ function App() {
             <Header />
             <Routes>
                <Route path="/" element={<Dashboard />} />
+               <Route path="/employee" element={<PostUser />} />
                <Route path="*" element={<NoMatch />} />
             </Routes>
          </>
