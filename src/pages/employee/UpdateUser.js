@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateUser = () => {
    const { id } = useParams();
+
+   const navigate = useNavigate();
 
    const [formData, setFormData] = useState({
       name: "",
@@ -39,11 +41,30 @@ const UpdateUser = () => {
       fetchEmployee();
    }, [id]);
 
+   const handleSubmit = async (event) => {
+      event.preventDefault();
+
+      try {
+         const response = await fetch(`http://localhost:8080/api/employee/${id}`, {
+            method: "PATCH",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+         });
+         const data = await response.json();
+         console.log("Employee updated:", data);
+         navigate("/");
+      } catch (error) {
+         console.log("Error updating employee:", error.message);
+      }
+   };
+
    return (
       <>
          <div className="center-form">
             <h1>Edit Employee</h1>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                <Form.Group controlId="formBasicName">
                   <Form.Control
                      type="text"
