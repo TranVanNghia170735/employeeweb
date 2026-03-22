@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
    const [employees, setEmployees] = useState([]);
+   const navigate = useNavigate();
    useEffect(() => {
       const fetchEmployees = async () => {
          try {
@@ -26,6 +28,9 @@ const Dashboard = () => {
       } catch (error) {
          console.log("Error deleting employee:", error.message);
       }
+   };
+   const handleUpdate = (employeeId) => {
+      navigate(`/employee/${employeeId}`);
    };
 
    return (
@@ -52,7 +57,10 @@ const Dashboard = () => {
                               <td>{employee.phone}</td>
                               <td>{employee.department}</td>
                               <td>
-                                 <Button variant="outline-secondary">Update</Button> {""}
+                                 <Button variant="outline-secondary" onClick={() => handleUpdate(employee.id)}>
+                                    Update
+                                 </Button>
+
                                  <Button variant="outline-danger" onClick={() => handleDelete(employee.id)}>
                                     Delete
                                  </Button>

@@ -3,6 +3,7 @@ import "./App.css";
 
 import Dashboard from "./pages/dashboard/Dashboard";
 import PostUser from "./pages/employee/PostUser";
+import UpdateUser from "./pages/employee/UpdateUser";
 import Header from "./pages/header/Header";
 import NoMatch from "./pages/noMatch/NoMatch";
 
@@ -14,6 +15,7 @@ function App() {
             <Routes>
                <Route path="/" element={<Dashboard />} />
                <Route path="/employee" element={<PostUser />} />
+               <Route path="/employee/:id" element={<UpdateUser />} />
                <Route path="*" element={<NoMatch />} />
             </Routes>
          </>
